@@ -1,5 +1,4 @@
-[10:20] Ferdi Gül
- Private Sub CommandButton1_Click()
+ Private Sub CommandButton1_Click()
     Dim myoutputfile As Integer
     Dim FilePath As String
     Set oShell = CreateObject("WScript.Shell")
